@@ -183,7 +183,7 @@ static void dellinebreak(char *str)
 	char ch;
 	while(ch=*str)
 	{
-		if(ch=='\n')
+		if(ch=='\n' || ch=='\r')
 		{
 			*str = 0;
 			break;
