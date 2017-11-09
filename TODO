@@ -1,0 +1,3 @@
+Implement functions
+int csvupdate(CSVD csvd, char *str, char *col, char *buf);
+int csvchkdb(CSVD csvd);
