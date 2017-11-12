@@ -1,4 +1,4 @@
-/* csvdblt - a miniature library for accessing data in .dsv format
+/* csvdblt - a miniature library for accessing data in .csv format
    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,7 +37,8 @@ static int ifstrname(char *str, char *ptrn, char delimiter);
 static void dellinebreak(char *str);
 
 /* Returns the number of columns in a row */
-static int strnumcol(char *str, char delimiter)
+static int 
+strnumcol(char *str, char delimiter)
 {
 	int result=0;
 	int len=0;
@@ -58,7 +59,8 @@ static int strnumcol(char *str, char delimiter)
 }
 
 /* Copies from src column at the number numcol in dst */
-static int selectcol(char *src, char *dst, int numcol, char delimiter)
+static int 
+selectcol(char *src, char *dst, int numcol, char delimiter)
 {
 	char ch;
 	int count 	= 0;
@@ -94,7 +96,8 @@ static int selectcol(char *src, char *dst, int numcol, char delimiter)
 }
 
 /* Return the number of column containing ptrn */
-static int findcol(CSVD csvd, char *ptrn)
+static int 
+findcol(CSVD csvd, char *ptrn)
 {
 	char buf[MAX_STRING_SIZE], *ptr;
 	int result 	= 0;
@@ -135,7 +138,8 @@ static int findcol(CSVD csvd, char *ptrn)
 	}
 }
 
-static int findsubstr(char *ptr, char *ptrn, char delimiter, int len, int flag)
+static int 
+findsubstr(char *ptr, char *ptrn, char delimiter, int len, int flag)
 {
 	if(flag && *ptr==DQUOTE && *(ptr + len + 1))
 	{
@@ -148,7 +152,8 @@ static int findsubstr(char *ptr, char *ptrn, char delimiter, int len, int flag)
 	return FALSE;
 }
 
-static int ifdelimiter(char *str, char delimiter)
+static int 
+ifdelimiter(char *str, char delimiter)
 {
 	char ch;
 	while(ch = *str++)
@@ -159,7 +164,8 @@ static int ifdelimiter(char *str, char delimiter)
 }
 
 /* Compares the first column with the sample */
-static int ifstrname(char *str, char *ptrn, char delimiter)
+static int 
+ifstrname(char *str, char *ptrn, char delimiter)
 {
 	int flag, len;
 	flag	= ifdelimiter(ptrn, delimiter);
@@ -168,7 +174,8 @@ static int ifstrname(char *str, char *ptrn, char delimiter)
 }
 
 /* Replaces the newline character with a null */
-static void dellinebreak(char *str)
+static void 
+dellinebreak(char *str)
 {
 	char ch;
 	while(ch=*str)
@@ -185,7 +192,8 @@ static void dellinebreak(char *str)
 
 /* Interface Functions */
 
-CSVD csvinit(char *name, char dlmtr)
+CSVD 
+csvinit(char *name, char dlmtr)
 {
 	FILE* 	hd;
 	CSVD	result;
@@ -197,14 +205,16 @@ CSVD csvinit(char *name, char dlmtr)
 	return result;
 }
 
-void csvclose(CSVD csvd)
+void 
+csvclose(CSVD csvd)
 {
 	fclose(csvd->fd);
 	free(csvd);
 	csvd = NULL;
 }
 
-int csvselect(CSVD csvd, char *str, char *col, char *dst)
+int 
+csvselect(CSVD csvd, char *str, char *col, char *dst)
 {
 	long oldpos;
 	int column;

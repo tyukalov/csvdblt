@@ -17,9 +17,12 @@ all:
 	gcc -c csvdblt.c
 	ar rc libcsvdblt.a csvdblt.o
 	rm *.o
-test:
-	gcc  test.c libcsvdblt.a -o test
-debug:
-	gcc -g test.c libcsvdblt.a -o test_debug
+	mv libcsvdblt.a ./bin
+test: all
+	gcc  ./test/test.c ./bin/libcsvdblt.a -o _test
+	mv _test ./test/test
+debug: 
+	gcc -g ./test/test.c csvdblt.c -o test_debug
+	mv test_debug ./test
 clean:
-	rm test test_debug
+	rm ./test/test ./test/test_debug ./bin/libcsvdblt.a
